@@ -1,0 +1,13 @@
+p {
+	color:red;
+}
+
+.title {
+	color:rgb(255, 0, 0);
+	font-style: italic;
+	font-weight: bold;
+}
+
+.description {
+	color:indigo;
+}
