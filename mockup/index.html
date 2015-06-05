@@ -3,24 +3,34 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Mockup</title>
+		<link href='http://fonts.googleapis.com/css?family=Lato:100,400&subset=latin-ext' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+		<link rel="stylesheet" href="bootstrap/css/style.css" type="text/css">
 	</head>	
 	<body>
 		<div class="container">
 			
 			<div class="row">
 				<div class="col-md-6">
-					<img src="http://placehold.it/100x100">
+					<img class="img-responsive title-logo" src="http://placehold.it/100x100">
 				</div>
-				<div class="col-md-6">
-					<h1>Jane Doette</h1>
-					<h3>Front-end Ninja</h3>
+				<div class="col-md-6 text-right">
+					<h1 class="title-super text-uppercase text-thin">Gustavo Magalhães</h1>
+					<h3>Coxinha Specialist</h3>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<hr>
 				</div>
 			</div>
 		
 			<div class="row">
 				<div class="col-md-12">
-					<img class="img-responsive" src="http://placehold.it/1140x350">
+					<img class="img-responsive" src="http://placehold.it/1140x350" data-toggle="modal" data-target="#project1">
 				</div>
 			</div>
 		
@@ -30,16 +40,16 @@
 				</div>
 			</div>
 		
-			<div class="row">
+			<div class="row text-center">
 				<div class="col-md-6">
-					<img src="http://placehold.it/555x300">
+					<img class="img-responsive" src="http://placehold.it/555x300">
 					<h3>Appify</h3>
 					<p>
 						<a href="http://github.com">link to project</a>
 					</p>
 				</div>
 				<div class="col-md-6">
-					<img src="http://placehold.it/555x300">
+					<img class="img-responsive" src="http://placehold.it/555x300">
 					<h3>Appify</h3>
 					<p>
 						<a href="http://github.com">link to project</a>
@@ -47,16 +57,16 @@
 				</div>
 			</div>
 			
-			<div class="row">
+			<div class="row text-center">
 				<div class="col-md-6">
-					<img src="http://placehold.it/555x300">
+					<img class="img-responsive" src="http://placehold.it/555x300">
 					<h3>Appify</h3>
 					<p>
 						<a href="http://github.com">link to project</a>
 					</p>
 				</div>
 				<div class="col-md-6">
-					<img src="http://placehold.it/555x300">
+					<img class="img-responsive" src="http://placehold.it/555x300">
 					<h3>Appify</h3>
 					<p>
 						<a href="http://github.com">link to project</a>
@@ -64,5 +74,24 @@
 				</div>				
 			</div>
 		</div>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="project1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="myModalLabel">Favorite App Page</h4>
+		      </div>
+		      <div class="modal-body">
+		        <img class="img-responsive" src="http://placehold.it/300x300">
+		        This was my first project in this class. I learned a lot about HTML and CSS.
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 	</body>
 </html>
