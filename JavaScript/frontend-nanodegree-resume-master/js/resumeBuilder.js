@@ -62,3 +62,34 @@ var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
 $("#header").append(formattedRole);
 $("#header").prepend(formattedName);
+displayWork();
+
+if (bio.skils.length > 0) {
+	$("#header").append(HTMLskillsStart);
+	
+	for (var skill in bio.skils) {
+		var formattedSkill = HTMLskills.replace("%data%", bio.skils[skill]);
+		$("#skills").append(formattedSkill);		
+	};
+}
+
+function displayWork() {
+	for (job in work.jobs) {
+		$("#workExperience").append(HTMLworkStart);
+		
+		var formattedEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		
+		var formattedTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+		
+		var formattedEmployerTitle = formattedEmployer + formattedTitle;
+		
+		$(".work-entry:last").append(formattedEmployerTitle);
+	}
+}
+
+$(document).click(function(loc) {
+  var x = loc.pageX;
+  var y = loc.pageY;
+  
+  logClicks(x,y);
+});
