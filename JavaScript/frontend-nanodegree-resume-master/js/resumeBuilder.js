@@ -1,20 +1,64 @@
-//$("#main").append("Gustavo");
+var bio = {
+	"name": "Gustavo Magalhães",
+	"role": "Web Developer",
+	"contacts": { 
+		"mobile": "(81) 99158-7267",
+		"email": "itsgustavopereira@gmail.com",
+		"github": "gustavomagalhaes",
+		"location": "Recife, PE" 
+	},	
+	"welcomeMessage" : "Hi, welcome to my page!",
+	"skils": ["awesomeness", "programming", "HTML5", "CSS5", "Javascript"],
+	"bioPic" : "images/fry"
+};
 
-var gustavo = "gustavito";
+var education = {
+	"schools": [
+		{
+			"name": "UFRPE",
+			"major": "BSI"
+		},
+		{
+			"name": "UF",
+			"major": "CS"
+		}
+	]
+};
 
-//console.log(gustavo);
+var work = {
+	"jobs": [
+		{
+			"employer": "UFPE NTI",
+			"title": "Intern",
+			"dates": "February 2015 - Future",
+			"description": "Developed Matlab codes"
+		},
+		{
+			"employer": "UCI iGraviLab",
+			"title": "Intern",
+			"dates": "June 2014 - September 2014",
+			"description": "Developed Matlab codes" 
+		}
+	]
+};
 
-var awesomeThoughts = "I am Gustavo and I am awesome!";
+var projects = {
+	"projects": [
+		{
+			"title": "Intern",
+			"dates": "February 2015 - Future",
+			"description": "Developed Matlab codes",
+			"images": [
+				"link1",
+				"link2"
+			]
+		}
+	]
+};
 
-//console.log(awesomeThoughts);
 
-var funThoughts = awesomeThoughts.replace("awesome", "fun");
+var formattedName = HTMLheaderName.replace("%data%", bio.name);
+var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
 
-//$("#main").append(funThoughts);
-
-var formattedName = HTMLheaderName.replace("%data%","Gustavo");
-
-var formattedRole = HTMLheaderRole.replace("%data%","Coxinha Specialist");
-
-$("#header").prepend(formattedRole);
+$("#header").append(formattedRole);
 $("#header").prepend(formattedName);
