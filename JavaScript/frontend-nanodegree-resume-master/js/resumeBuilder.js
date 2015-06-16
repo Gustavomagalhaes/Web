@@ -93,3 +93,5 @@ $(document).click(function(loc) {
   
   logClicks(x,y);
 });
+
+$("#mapDiv").append(googleMap);
