@@ -4,6 +4,17 @@
 		<meta charset="UTF-8">
 		<title>Jogo da Coxinha</title>
 		
+		<style>
+			canvas {
+				position: absolute;
+				top: 0px;
+				bottom: 0px;
+				left: 0px;
+				right: 0px;
+				margin: auto;
+			}
+		</style>
+		
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
@@ -13,26 +24,46 @@
 	<body>
 		<script>
 			//Variáveis do jogo
-			var canvas, ctx, gameHeight, gameLenght, frames = 0;
+			var canvas, ctx, gameHeight, gameWidth, frames = 0;
 			
 			function main() {
+				gameHeight = window.innerHeight;
+				gameWidth = window.innerWidth;
 				
+				if (gameWidth >= 800) {
+					gameHeight = 762;
+					gameWidth = 1024;
+				}
+				
+				canvas = document.createElement("canvas");
+				canvas.width = gameWidth;
+				canvas.height = gameHeight;
+				canvas.style.border = "1px solid #000";
+				
+				ctx = canvas.getContext("2d");
+				document.body.appendChild(canvas);
+				document.addEventListener("mousedown", keyboard);
+				
+				run();
 			}
 			
-			function click() {
-				
+			function keyboard(event) {
+				alert("Mozão, te amo!");
 			}
 			
 			function run() {
-				
+				update();
+				draw();
+				window.requestAnimationFrame(run);
 			}
 			
 			function update() {
-				
+				frames++;
 			}
 			
 			function draw() {
-				
+				ctx.fillStyle = "#6600CC";
+				ctx.fillRect(0, 0, gameWidth, gameHeight);
 			}
 			
 			//Inicializa o jogo
