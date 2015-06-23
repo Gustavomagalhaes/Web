@@ -18,7 +18,7 @@
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-		<link rel="icon" href="image/coxinha.png">
+		<link rel="icon" href="image/coxinhaSM.png">
 	</head>	
 	
 	<body>
@@ -26,14 +26,13 @@
 
 <!--		<input size="40" value="Write a character into this field!" onkeypress="GetChar (event);"/>-->
 		
-		<img id="coxinha" src="image/coxinhasmall.png" alt="Coxinha" width="50" height="50">
+		<img id="coxinha" src="image/coxinhaSM.png" alt="Coxinha">
 		
 		<script> // Javascript
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
-			var X = -50, Y = 370, speed = 20;
+			var X = -25, Y = 567, speed = 1;
 		
-			
 			function main() {
 				gameHeight = window.innerHeight;
 				gameWidth = window.innerWidth;
@@ -72,7 +71,6 @@
 				            break;
 				    }
 				};
-				
 				run();
 			}
 			
@@ -96,18 +94,19 @@
 			}
 			
 			function draw() {
-				//Desenha o background
-				ctx.fillStyle = "#6600CC";
+				//Céu
+				ctx.fillStyle = "#0066FF";
 				ctx.fillRect(0, 0, gameWidth, gameHeight);
 				
-				//Desenha a coxinha no canvas
+				//Nuvens
+				
+				
+				//Coxinha
 			    var img = document.getElementById("coxinha");
 			    ctx.drawImage(img, X, Y);
 				img.style.visibility = "hidden";
 
 			}
-			
-			//Inicializa o jogo
 			main();
 		</script>
 		</body>
