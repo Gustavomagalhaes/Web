@@ -31,7 +31,7 @@
 		<script> // Javascript
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
-			var X = -50, Y = 370;
+			var X = -50, Y = 370, speed = 20;
 		
 			
 			function main() {
@@ -55,20 +55,20 @@
 				document.onkeydown = function(e) {
 				    switch (e.keyCode) {
 				        case 37:
-//				            alert('left');
-							X=X-5;
+				            //alert('left');
+							X=X-speed;
 				            break;
 				        case 38:
-//				            alert('up');
-							Y=Y-5;
+				            //alert('up');
+							Y=Y-speed;
 				            break;
 				        case 39:
-//				            alert('right');
-							X=X+5;
+				            //alert('right');
+							X=X+speed;
 				            break;
 				        case 40:
-//				            alert('down');
-							Y=Y+5;
+				            //alert('down');
+							Y=Y+speed;
 				            break;
 				    }
 				};
@@ -84,42 +84,6 @@
 	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
 	            alert ("The Unicode character code is: " + chCode);
         	}
-
-			function OnKeyDown(event) {
-	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
-	
-	            if (chCode == 100 /* D */) {
-					X=X+5;
-	            }
-				
-	            if (chCode == 97 /* A */) {
-					X=X-5;
-	            }
-				
-				if (chCode == 119 /* W */) {
-					Y=Y-5;
-	            }
-				
-	            if (chCode == 115 /* S */) {
-					Y=Y+5;
-	            }
-				
-				if (chCode == 39 /* Right */) {
-					X=X+5;
-	            }
-				
-	            if (chCode == 37 /* Left */) {
-					X=X-5;
-	            }
-				
-				if (chCode == 38 /* Up */) {
-					Y=Y-5;
-	            }
-				
-	            if (chCode == 40 /* Down */) {
-					Y=Y+5;
-	            }
-	        }
 			
 			function run() {
 				update();
