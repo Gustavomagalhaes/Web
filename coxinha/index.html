@@ -18,13 +18,21 @@
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-		<link rel="icon" href="image/panda.png">
+		<link rel="icon" href="image/coxinha.png">
 	</head>	
 	
 	<body>
-		<script>
+<!--Triggers-->
+
+<!--		<input size="40" value="Write a character into this field!" onkeypress="GetChar (event);"/>-->
+		
+		<img id="coxinha" src="image/coxinhasmall.png" alt="Coxinha" width="50" height="50">
+		
+		<script> // Javascript
 			//Variáveis do jogo
-			var canvas, ctx, gameHeight, gameWidth, frames = 0;
+			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
+			var X = -50, Y = 370;
+		
 			
 			function main() {
 				gameHeight = window.innerHeight;
@@ -43,13 +51,75 @@
 				ctx = canvas.getContext("2d");
 				document.body.appendChild(canvas);
 				document.addEventListener("mousedown", keyboard);
+
+				document.onkeydown = function(e) {
+				    switch (e.keyCode) {
+				        case 37:
+//				            alert('left');
+							X=X-5;
+				            break;
+				        case 38:
+//				            alert('up');
+							Y=Y-5;
+				            break;
+				        case 39:
+//				            alert('right');
+							X=X+5;
+				            break;
+				        case 40:
+//				            alert('down');
+							Y=Y+5;
+				            break;
+				    }
+				};
 				
 				run();
 			}
 			
 			function keyboard(event) {
-				alert("Mozão, te amo!");
+//				alert("Mozão, te amo!");
 			}
+			
+			function GetChar(event){
+	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+	            alert ("The Unicode character code is: " + chCode);
+        	}
+
+			function OnKeyDown(event) {
+	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+	
+	            if (chCode == 100 /* D */) {
+					X=X+5;
+	            }
+				
+	            if (chCode == 97 /* A */) {
+					X=X-5;
+	            }
+				
+				if (chCode == 119 /* W */) {
+					Y=Y-5;
+	            }
+				
+	            if (chCode == 115 /* S */) {
+					Y=Y+5;
+	            }
+				
+				if (chCode == 39 /* Right */) {
+					X=X+5;
+	            }
+				
+	            if (chCode == 37 /* Left */) {
+					X=X-5;
+	            }
+				
+				if (chCode == 38 /* Up */) {
+					Y=Y-5;
+	            }
+				
+	            if (chCode == 40 /* Down */) {
+					Y=Y+5;
+	            }
+	        }
 			
 			function run() {
 				update();
@@ -62,12 +132,19 @@
 			}
 			
 			function draw() {
+				//Desenha o background
 				ctx.fillStyle = "#6600CC";
 				ctx.fillRect(0, 0, gameWidth, gameHeight);
+				
+				//Desenha a coxinha no canvas
+			    var img = document.getElementById("coxinha");
+			    ctx.drawImage(img, X, Y);
+				img.style.visibility = "hidden";
+
 			}
 			
 			//Inicializa o jogo
 			main();
 		</script>
-	</body>
+		</body>
 </html>
