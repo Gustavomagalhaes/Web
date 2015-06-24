@@ -31,7 +31,7 @@
 		<script> // Javascript
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
-			var X = -25, Y = 567, speed = 1;
+			var X = -25, Y = 567, speed = 50;
 		
 			function main() {
 				gameHeight = window.innerHeight;
@@ -95,7 +95,7 @@
 			
 			function draw() {
 				//Céu
-				ctx.fillStyle = "#0066FF";
+				ctx.fillStyle = "#99CCFF";
 				ctx.fillRect(0, 0, gameWidth, gameHeight);
 				
 				//Nuvens
