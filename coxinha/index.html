@@ -18,7 +18,7 @@
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-		<link rel="icon" href="image/coxinhaSM.png">
+		<link rel="icon" href="image/coxinha300.png">
 	</head>	
 	
 	<body>
@@ -26,12 +26,16 @@
 
 <!--		<input size="40" value="Write a character into this field!" onkeypress="GetChar (event);"/>-->
 		
-		<img id="coxinha" src="image/coxinhaSM.png" alt="Coxinha">
+<!--		<div style="visibility:hidden;">
+			<img id="coxinha" src="image/coxinha300.png" alt="Coxinha">
+		</div>-->
 		
 		<script> // Javascript
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
-			var X = -25, Y = 567, speed = 50;
+			var X = -37, Y = 469, speed = 50;
+			var message;
+			var mouseX, mouseY;
 		
 			function main() {
 				gameHeight = window.innerHeight;
@@ -49,7 +53,14 @@
 				
 				ctx = canvas.getContext("2d");
 				document.body.appendChild(canvas);
-				document.addEventListener("mousedown", keyboard);
+//				document.addEventListener("mousedown", keyboard);
+
+				document.addEventListener('mousemove', function(evt) {
+					var mousePosition = getMousePosition(canvas, evt);
+					setMousePosition(mousePosition.x, mousePosition.y); 
+					message = 'Mouse position: \nX: ' + mouseX + ', Y: ' + mouseY;
+					console.log(message);
+					}, false);
 
 				document.onkeydown = function(e) {
 				    switch (e.keyCode) {
@@ -74,14 +85,34 @@
 				run();
 			}
 			
-			function keyboard(event) {
+			function setMousePosition(x, y) {
+				mouseX = x;
+				mouseY = y;
+			}
+
+			
+//			function keyboard(event) {
 //				alert("Mozão, te amo!");
+//			}
+			
+			function writeMessage(message) {
+			    ctx.font = '18pt Calibri';
+			    ctx.fillStyle = 'black';
+				ctx.fillText(message, 10, 25);
+			    }
+				
+			function getMousePosition(canvas, evt) {
+				var rect = canvas.getBoundingClientRect();
+				return {
+				  x: evt.clientX - rect.left,
+				  y: evt.clientY - rect.top
+				};
 			}
 			
-			function GetChar(event){
-	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
-	            alert ("The Unicode character code is: " + chCode);
-        	}
+//			function GetChar(event){
+//	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
+//	            alert ("The Unicode character code is: " + chCode);
+//        	}
 			
 			function run() {
 				update();
@@ -94,18 +125,18 @@
 			}
 			
 			function draw() {
-				//Céu
+				// Céu
 				ctx.fillStyle = "#99CCFF";
 				ctx.fillRect(0, 0, gameWidth, gameHeight);
-				
-				//Nuvens
-				
-				
-				//Coxinha
-			    var img = document.getElementById("coxinha");
-			    ctx.drawImage(img, X, Y);
-				img.style.visibility = "hidden";
 
+				// Coxinha
+//			    var img = document.getElementById("coxinha");
+				var img = new Image();
+				img.src = 'image/coxinha300.png';
+			    ctx.drawImage(img, mouseX-150, mouseY-150);
+				
+				// Mensagem na tela
+				writeMessage(message);
 			}
 			main();
 		</script>
