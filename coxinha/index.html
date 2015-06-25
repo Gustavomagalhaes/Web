@@ -15,8 +15,11 @@
 			}
 			
 			html, body {
-            	background: #d1d2d1 url(image/background.jpeg) repeat fixed left top !important;
-          	}
+/*				background: #000000;*/
+/*            	background: #d1d2d1 url(image/backgroundDark.jpg) repeat fixed left top !important;*/
+          		background: #d1d2d1 url(image/backgroundLight.jpeg) repeat fixed left top !important;
+          	
+			}
 
 		</style>
 		
@@ -54,7 +57,7 @@
 				canvas = document.createElement("canvas");
 				canvas.width = gameWidth;
 				canvas.height = gameHeight;
-				canvas.style.border = "1px solid #000";
+//				canvas.style.border = "1px solid #000";
 				
 				ctx = canvas.getContext("2d");
 				document.body.appendChild(canvas);
@@ -132,18 +135,24 @@
 			
 			function draw() {
 				// Céu
-				ctx.fillStyle = "#99CCFF";
+//				ctx.fillStyle = "#99CCFF";
 //				ctx.fillStyle = "transparent";
-				ctx.fillRect(0, 0, gameWidth, gameHeight);
-
+//				ctx.fillRect(0, 0, gameWidth, gameHeight);
+				
+				// Cenário
+				var scene = new Image();
+//				scene.src = 'image/scene.png';
+				scene.src = 'image/scene3.png';
+			    ctx.drawImage(scene, 0, 0);
+				
 				// Coxinha
 //			    var img = document.getElementById("coxinha");
-				var img = new Image();
-				img.src = 'image/coxinha300.png';
-			    ctx.drawImage(img, mouseX-150, mouseY-150);
+				var coxinha = new Image();
+				coxinha.src = 'image/coxinha300.png';
+			    ctx.drawImage(coxinha, mouseX-150, mouseY-150);
 				
 				// Mensagem na tela
-				writeMessage(message);
+//				writeMessage(message);
 			}
 			main();
 		</script>
