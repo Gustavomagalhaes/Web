@@ -13,6 +13,11 @@
 				right: 0px;
 				margin: auto;
 			}
+			
+			html, body {
+            	background: #d1d2d1 url(image/background.jpeg) repeat fixed left top !important;
+          	}
+
 		</style>
 		
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
@@ -89,7 +94,6 @@
 				mouseX = x;
 				mouseY = y;
 			}
-
 			
 //			function keyboard(event) {
 //				alert("Mozão, te amo!");
@@ -116,8 +120,10 @@
 			
 			function run() {
 				update();
+//				ctx.clearRect(0, 0, gameWidth, gameHeight);
 				draw();
 				window.requestAnimationFrame(run);
+				
 			}
 			
 			function update() {
@@ -127,6 +133,7 @@
 			function draw() {
 				// Céu
 				ctx.fillStyle = "#99CCFF";
+//				ctx.fillStyle = "transparent";
 				ctx.fillRect(0, 0, gameWidth, gameHeight);
 
 				// Coxinha
@@ -140,5 +147,6 @@
 			}
 			main();
 		</script>
-		</body>
+<!--		<img id="coxinha" src="image/coxinha1000.png" width="400" height="400" alt="Coxinha 1000">-->
+	</body>
 </html>
