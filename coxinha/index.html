@@ -18,9 +18,7 @@
 /*				background: #000000;*/
 /*            	background: #d1d2d1 url(image/backgroundDark.jpg) repeat fixed left top !important;*/
           		background: #d1d2d1 url(image/backgroundLight.jpeg) repeat fixed left top !important;
-          	
 			}
-
 		</style>
 		
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
@@ -41,7 +39,10 @@
 		<script> // Javascript
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
-			var X = -37, Y = 469, speed = 50;
+			var Xstill = 350, Ystill = 400;
+			var Xbottom = 497, Ybottom = 690;
+			var jumpHeight = 150;
+			var speed = 15;
 			var message;
 			var mouseX, mouseY;
 		
@@ -57,7 +58,7 @@
 				canvas = document.createElement("canvas");
 				canvas.width = gameWidth;
 				canvas.height = gameHeight;
-//				canvas.style.border = "1px solid #000";
+//				canvas.style.border = "5px solid #000";
 				
 				ctx = canvas.getContext("2d");
 				document.body.appendChild(canvas);
@@ -74,19 +75,24 @@
 				    switch (e.keyCode) {
 				        case 37:
 				            //alert('left');
-							X=X-speed;
+//							X=X-speed;
+							animate("X",jumpHeight,300);
 				            break;
 				        case 38:
 				            //alert('up');
-							Y=Y-speed;
+//							Y=Y-speed;
+							animate("Y",jumpHeight,300);
+//							animateY(-150,300);
 				            break;
 				        case 39:
 				            //alert('right');
-							X=X+speed;
-				            break;
+//							X=X+speed;
+				            animate("X",-jumpHeight,300);
+							break;
 				        case 40:
 				            //alert('down');
-							Y=Y+speed;
+//							Y=Y+speed;
+							animate("Y",-jumpHeight,300);
 				            break;
 				    }
 				};
@@ -126,36 +132,81 @@
 //				ctx.clearRect(0, 0, gameWidth, gameHeight);
 				draw();
 				window.requestAnimationFrame(run);
-				
 			}
 			
 			function update() {
 				frames++;
 			}
 			
-			function draw() {
-				// Céu
-//				ctx.fillStyle = "#99CCFF";
-//				ctx.fillStyle = "transparent";
-//				ctx.fillRect(0, 0, gameWidth, gameHeight);
+			function animate(index, distance, duration) {
+				var start = new Date().getTime();
+				var end = start + duration;
+				var currentY = Ystill;
+				var currentX = Xstill;
 				
-				// Cenário
-				var scene = new Image();
-//				scene.src = 'image/scene.png';
-				scene.src = 'image/sceneInside.png';
-			    ctx.drawImage(scene, 0, 0);
-				
+				function step() {
+					var timestamp = new Date().getTime();
+					var progress = Math.min((duration - (end - timestamp)) / duration, 1);
+					
+					if (index == 'X') {
+						Xstill = currentX - (distance * progress);	
+					} 
+					
+					if (index == 'Y') {
+						Ystill = currentY - (distance * progress);
+					}
+					
+					if (progress < 1) requestAnimationFrame(step);
+				}
+				return step();
+			}
+			
+			function jump() {
+				animate("Y",jumpHeight,300);
+			}
+			
+			function drawCoxinha() {
 				// Coxinha
 //			    var img = document.getElementById("coxinha");
 				var coxinha = new Image();
 				coxinha.src = 'image/coxinha300.png';
-			    ctx.drawImage(coxinha, mouseX-150, mouseY-150);
-				
-				// Mensagem na tela
-//				writeMessage(message);
+//			    ctx.drawImage(coxinha, mouseX-150, mouseY-150);
+//				ctx.beginPath();
+				ctx.drawImage(coxinha, Xstill, Ystill);
+			}
+			
+			function ellipse(cx, cy, rx, ry) {
+		        ctx.save(); // save state
+		        ctx.beginPath();
+		        ctx.translate(cx-rx, cy-ry);
+		        ctx.scale(rx, ry);
+		        ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
+		        ctx.restore(); // restore to original state
+		        ctx.stroke();
+			}
+			
+			function drawShadow() {
+				ctx.fillStyle = "black";
+				ctx.fill();
+				ellipse(Xbottom, Ybottom, 100, 20);
+			}
+			
+			function drawScene() {
+//				ctx.fillStyle = "#99CCFF";
+//				ctx.fillStyle = "transparent";
+//				ctx.fillRect(0, 0, gameWidth, gameHeight);
+				var scene = new Image();
+//				scene.src = 'image/scene.png';
+				scene.src = 'image/sceneInside.png';
+			    ctx.drawImage(scene, 0, 0);	
+			}
+			
+			function draw() {
+				drawScene();
+				drawShadow();
+				drawCoxinha();
 			}
 			main();
 		</script>
-<!--		<img id="coxinha" src="image/coxinha1000.png" width="400" height="400" alt="Coxinha 1000">-->
 	</body>
 </html>
