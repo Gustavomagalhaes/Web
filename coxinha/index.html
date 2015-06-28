@@ -40,11 +40,13 @@
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
 			var Xstill = 350, Ystill = 400;
-			var Xbottom = 497, Ybottom = 690;
-			var jumpHeight = 150;
+			var Xbottom = 497, Ybottom = 680;
+			var Yjumping = Ystill + jumpHeight;
+			var jumpHeight = 200;
 			var speed = 15;
 			var message;
 			var mouseX, mouseY;
+			var jumping = false;
 		
 			function main() {
 				gameHeight = window.innerHeight;
@@ -81,9 +83,8 @@
 				        case 38:
 				            //alert('up');
 //							Y=Y-speed;
-							animate("Y",jumpHeight,300);
-//							animateY(-150,300);
-				            break;
+							if (!jumping) jump();
+							break;
 				        case 39:
 				            //alert('right');
 //							X=X+speed;
@@ -138,8 +139,9 @@
 				frames++;
 			}
 			
-			function animate(index, distance, duration) {
+			function animate(index, range, duration) {
 				var start = new Date().getTime();
+				var distance = range;
 				var end = start + duration;
 				var currentY = Ystill;
 				var currentX = Xstill;
@@ -156,13 +158,29 @@
 						Ystill = currentY - (distance * progress);
 					}
 					
-					if (progress < 1) requestAnimationFrame(step);
+					if (index == 'JUMP') {
+						Ystill = currentY - (distance * progress);
+					} 
+					
+					if (progress < 1) {
+						requestAnimationFrame(step);
+					} 
+					
+					if (progress == 1 && index == 'JUMP') {
+						land();
+					}
 				}
 				return step();
 			}
 			
 			function jump() {
-				animate("Y",jumpHeight,300);
+				jumping = true;
+				animate("JUMP",jumpHeight,200);
+			}
+			
+			function land() {
+				animate("Y",-jumpHeight,200);
+				jumping = false;
 			}
 			
 			function drawCoxinha() {
@@ -188,7 +206,13 @@
 			function drawShadow() {
 				ctx.fillStyle = "black";
 				ctx.fill();
-				ellipse(Xbottom, Ybottom, 100, 20);
+				rx = 100, ry = 20;
+				var scale = 0.85;
+				if (jumping) {
+					ellipse(Xbottom, Ybottom, rx*scale, ry*scale);	
+				} else {
+					ellipse(Xbottom, Ybottom, rx, ry);	
+				}
 			}
 			
 			function drawScene() {
@@ -196,8 +220,7 @@
 //				ctx.fillStyle = "transparent";
 //				ctx.fillRect(0, 0, gameWidth, gameHeight);
 				var scene = new Image();
-//				scene.src = 'image/scene.png';
-				scene.src = 'image/sceneInside.png';
+				scene.src = 'image/scene.png';
 			    ctx.drawImage(scene, 0, 0);	
 			}
 			
