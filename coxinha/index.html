@@ -40,14 +40,17 @@
 			//Variáveis do jogo
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
 			var Xstill = 350, Ystill = 400;
-			var Xbottom = 497, Ybottom = 680;
-			var Yjumping = Ystill + jumpHeight;
+			var Xdefault = Xstill, Ydefault = Ystill;
 			var jumpHeight = 200;
 			var speed = 15;
 			var message;
 			var mouseX, mouseY;
 			var jumping = false;
-		
+			var coinSwitcher = 0;
+			var coinX = 400;
+			var audio = new Audio('coin.mp3');
+			
+ 		
 			function main() {
 				gameHeight = window.innerHeight;
 				gameWidth = window.innerWidth;
@@ -78,7 +81,8 @@
 				        case 37:
 				            //alert('left');
 //							X=X-speed;
-							animate("X",jumpHeight,300);
+//							if (!jumping) jump();
+							animate("X",50,50);
 				            break;
 				        case 38:
 				            //alert('up');
@@ -88,12 +92,13 @@
 				        case 39:
 				            //alert('right');
 //							X=X+speed;
-				            animate("X",-jumpHeight,300);
+//							if (!jumping) jump();
+				            animate("X",-50,50);
 							break;
 				        case 40:
 				            //alert('down');
 //							Y=Y+speed;
-							animate("Y",-jumpHeight,300);
+//							animate("Y",-jumpHeight,300);
 				            break;
 				    }
 				};
@@ -130,6 +135,7 @@
 			
 			function run() {
 				update();
+				tip();
 //				ctx.clearRect(0, 0, gameWidth, gameHeight);
 				draw();
 				window.requestAnimationFrame(run);
@@ -137,6 +143,8 @@
 			
 			function update() {
 				frames++;
+				coinSwitcher++;
+				if (coinSwitcher > 9) coinSwitcher = 0;
 			}
 			
 			function animate(index, range, duration) {
@@ -178,8 +186,33 @@
 				animate("JUMP",jumpHeight,200);
 			}
 			
+//			function checkPosition() {
+//				if (Ystill = Ydefault) {
+//					return true;
+//				} else {
+//					return false;
+//				}
+//			}
+
+			function tip() {
+				var Xtip = Xstill+150, Ytip = Ystill;
+				if (Ytip <= 200) {
+					if (Xtip >= coinX && Xtip <= coinX+100) {
+						sound();
+						coinX = getRandomInt(50, gameWidth-150);	
+					}
+				} 
+			}
+			
+			function sound() {
+				audio.play();	
+			}
+			
+			
 			function land() {
-				animate("Y",-jumpHeight,200);
+				var back = Ystill-Ydefault;
+				animate("Y",back,200);
+//				animate("Y",-jumpHeight,200);
 				jumping = false;
 			}
 			
@@ -200,19 +233,16 @@
 		        ctx.scale(rx, ry);
 		        ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
 		        ctx.restore(); // restore to original state
-		        ctx.stroke();
+//		        ctx.stroke();
 			}
 			
 			function drawShadow() {
+				var Xbottom = Xstill+147, Ybottom = 680;
 				ctx.fillStyle = "black";
 				ctx.fill();
-				rx = 100, ry = 20;
-				var scale = 0.85;
-				if (jumping) {
-					ellipse(Xbottom, Ybottom, rx*scale, ry*scale);	
-				} else {
-					ellipse(Xbottom, Ybottom, rx, ry);	
-				}
+				var rx = 100, ry = 20;
+				var scaleShadow = Ystill/370;
+				ellipse(Xbottom, Ybottom, rx*scaleShadow, ry*scaleShadow);	
 			}
 			
 			function drawScene() {
@@ -224,10 +254,22 @@
 			    ctx.drawImage(scene, 0, 0);	
 			}
 			
+			function getRandomInt(min, max) {
+    			return Math.floor(Math.random() * (max - min + 1)) + min;
+			}
+			
+			function drawCoin() {
+				var coin = new Image();
+				coin.src = 'image/coins.jpg';
+				ctx.drawImage(coin, coinSwitcher*100, 0, 100, 100, coinX, 200, 100, 100);
+			}
+			
 			function draw() {
 				drawScene();
 				drawShadow();
+				drawCoin();
 				drawCoxinha();
+				sound();
 			}
 			main();
 		</script>
