@@ -49,7 +49,7 @@
 			var coinSwitcher = 0;
 			var coinX = 400;
 			var audio = new Audio('coin.mp3');
-			
+			var pageTurner = 0, cloudTurner = 0;
  		
 			function main() {
 				gameHeight = window.innerHeight;
@@ -63,7 +63,7 @@
 				canvas = document.createElement("canvas");
 				canvas.width = gameWidth;
 				canvas.height = gameHeight;
-//				canvas.style.border = "5px solid #000";
+//				canvas.style.border = "1px solid #000";
 				
 				ctx = canvas.getContext("2d");
 				document.body.appendChild(canvas);
@@ -82,18 +82,21 @@
 				            //alert('left');
 //							X=X-speed;
 //							if (!jumping) jump();
-							animate("X",50,50);
+							if (checkPosition()) smallJump();
+							animate("X",jumpHeight/2,200);
 				            break;
 				        case 38:
 				            //alert('up');
 //							Y=Y-speed;
-							if (!jumping) jump();
+							if (checkPosition()) jump();
+//							if (!jumping) jump();
 							break;
 				        case 39:
 				            //alert('right');
 //							X=X+speed;
 //							if (!jumping) jump();
-				            animate("X",-50,50);
+							if (checkPosition()) smallJump();
+				            animate("X",-jumpHeight/2,200);
 							break;
 				        case 40:
 				            //alert('down');
@@ -143,8 +146,12 @@
 			
 			function update() {
 				frames++;
+				pageTurner++;
+				cloudTurner++;
 				coinSwitcher++;
 				if (coinSwitcher > 9) coinSwitcher = 0;
+				if (pageTurner > gameWidth) pageTurner = 0;
+				if (cloudTurner > gameWidth*4) cloudTurner = 0;
 			}
 			
 			function animate(index, range, duration) {
@@ -186,13 +193,18 @@
 				animate("JUMP",jumpHeight,200);
 			}
 			
-//			function checkPosition() {
-//				if (Ystill = Ydefault) {
-//					return true;
-//				} else {
-//					return false;
-//				}
-//			}
+			function smallJump() {
+				jumping = true;
+				animate("JUMP",jumpHeight/2,100);
+			}
+			
+			function checkPosition() {
+				if (Ystill = Ydefault) {
+					return true;
+				} else {
+					return false;
+				}
+			}
 
 			function tip() {
 				var Xtip = Xstill+150, Ytip = Ystill;
@@ -251,7 +263,15 @@
 //				ctx.fillRect(0, 0, gameWidth, gameHeight);
 				var scene = new Image();
 				scene.src = 'image/scene.png';
-			    ctx.drawImage(scene, 0, 0);	
+			    ctx.drawImage(scene, 0-pageTurner, 0);
+				ctx.drawImage(scene, gameWidth-pageTurner, 0);	
+			}
+			
+			function drawClouds() {
+				var clouds = new Image();
+				clouds.src = 'image/clouds.svg';
+			    ctx.drawImage(clouds, 0-cloudTurner/4, 0);
+				ctx.drawImage(clouds, gameWidth-cloudTurner/4, 0);	
 			}
 			
 			function getRandomInt(min, max) {
@@ -266,6 +286,7 @@
 			
 			function draw() {
 				drawScene();
+				drawClouds();
 				drawShadow();
 				drawCoin();
 				drawCoxinha();
