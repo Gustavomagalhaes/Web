@@ -14,6 +14,11 @@ function initialize() {
   var markers = [];
   var map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
 
+  // var defaultBounds = new google.maps.LatLngBounds(
+  //     new google.maps.LatLng(-8.052789299999999, -34.94927110000003),
+  //     new google.maps.LatLng(-8.052789299999999, -34.94927110000003));
+  // map.fitBounds(defaultBounds);
+
   // Create the search box and link it to the UI element.
   var input = /** @type {HTMLInputElement} */(
       document.getElementById('pac-input'));
