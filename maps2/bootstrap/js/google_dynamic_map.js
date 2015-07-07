@@ -1,59 +1,23 @@
-//// Map Initialize function
-//function initialize() 
-//{		
-//	// Set static latitude, longitude value
-//	var latlng = new google.maps.LatLng(-8.052789299999999, -34.94927110000003);
-//	
-//	// Get current location
-////	navigator.geolocation.getCurrentPosition(function(position) {
-////      latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);;
-//	
-//	// Set map options
-//	var myOptions = {
-//		zoom: 16,
-//		center: latlng,
-//		panControl: true,
-//		zoomControl: true,
-//		scaleControl: true,
-//		mapTypeId: google.maps.MapTypeId.ROADMAP
-//	}
-//	
-//	// Create map object with options
-//	map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-//	
-//	// Create and set the marker
-//	marker = new google.maps.Marker({
-//		map: map,
-//		draggable:true,	
-//		position: latlng
-//	});
-//	
-//	// Register Custom "dragend" Event
-//	google.maps.event.addListener(marker, 'dragend', function() {
-//		
-//		// Get the Current position, where the pointer was dropped
-//		var point = marker.getPosition();
-//		
-//		// Center the map at given point
-//		map.panTo(point);
-//		
-//		// Update the textbox
-//		document.getElementById('MyCoordinates').value=point.lat()+", "+point.lng();
-//		console.log(point.lat()+", "+point.lng());
-//	});
-//}
-
 function initialize() {
 
-  var markers = [];
-  var map = new google.maps.Map(document.getElementById('map-canvas'), {
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  });
+  var latlng = new google.maps.LatLng(-8.052789299999999, -34.94927110000003);
 
-  var defaultBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-33.8902, 151.1759),
-      new google.maps.LatLng(-33.8474, 151.2631));
-  map.fitBounds(defaultBounds);
+  var myOptions = {
+		zoom: 16,
+		center: latlng,
+		panControl: true,
+		zoomControl: true,
+		scaleControl: true,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+  
+  var markers = [];
+  var map = new google.maps.Map(document.getElementById('map-canvas'), myOptions);
+
+  // var defaultBounds = new google.maps.LatLngBounds(
+  //     new google.maps.LatLng(-8.052789299999999, -34.94927110000003),
+  //     new google.maps.LatLng(-8.052789299999999, -34.94927110000003));
+  // map.fitBounds(defaultBounds);
 
   // Create the search box and link it to the UI element.
   var input = /** @type {HTMLInputElement} */(
@@ -66,6 +30,7 @@ function initialize() {
   // [START region_getplaces]
   // Listen for the event fired when the user selects an item from the
   // pick list. Retrieve the matching places for that item.
+  
   google.maps.event.addListener(searchBox, 'places_changed', function() {
     var places = searchBox.getPlaces();
 
@@ -76,34 +41,48 @@ function initialize() {
       marker.setMap(null);
     }
 
-    // For each place, get the icon, place name, and location.
+    //For each place, get the icon, place name, and location.
     markers = [];
     var bounds = new google.maps.LatLngBounds();
     for (var i = 0, place; place = places[i]; i++) {
       var image = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
+        // url: place.icon,
+        url: "image/icon.png",
+        size: new google.maps.Size(200, 200),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
+        anchor: new google.maps.Point(60, 120),
+        scaledSize: new google.maps.Size(120, 120)
       };
 
       // Create a marker for each place.
       var marker = new google.maps.Marker({
         map: map,
+        draggable:true,
         icon: image,
         title: place.name,
-        position: place.geometry.location
+        position: place.geometry.location,
+        // position: latlng
       });
-
+      
+      google.maps.event.addListener(marker, 'dragend', function() {
+		
+    		// Get the Current position, where the pointer was dropped
+    		var point = marker.getPosition();
+    		
+    		// Center the map at given point
+    		map.panTo(point);
+    		
+    		// Update the textbox
+    		document.getElementById('MyCoordinates').value=point.lat()+", "+point.lng();
+    		console.log(point.lat()+", "+point.lng());
+    	});
+      
       markers.push(marker);
 
-      bounds.extend(place.geometry.location);
+      bounds.extend(place.geometry.location);      
     }
-
     map.fitBounds(bounds);
   });
-  // [END region_getplaces]
 
   // Bias the SearchBox results towards places that are within the bounds of the
   // current map's viewport.

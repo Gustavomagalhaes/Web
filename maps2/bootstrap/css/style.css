@@ -9,6 +9,7 @@ body {
 	height: 600px;
 	margin: 0px;
 	padding: 0px;
+	border:solid black 1px;
 }
 
 .controls {
