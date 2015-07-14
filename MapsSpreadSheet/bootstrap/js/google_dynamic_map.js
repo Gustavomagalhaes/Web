@@ -3,7 +3,7 @@ function initialize() {
   var latlng = new google.maps.LatLng(-8.052789299999999, -34.94927110000003);
 
   var myOptions = {
-		zoom: 16,
+		zoom: 12,
 		center: latlng,
 		panControl: true,
 		zoomControl: true,

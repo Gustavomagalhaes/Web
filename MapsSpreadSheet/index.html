@@ -18,40 +18,69 @@
   </head>
   
   <body>
-	<div class="row">
+	  
+	<div id="logo">
+		<img class="img-responsive center-block" src="image/minilogo.png" alt="logo DangerZone">
+	</div>
+	
+	<div id="header">
+		
+		<div class="col-lg-4">
+			<select class="form-control">
+				  <option>Ocorrência 1</option>
+				  <option>Ocorrência 2</option>
+				  <option>Ocorrência 3</option>
+				  <option>Ocorrência 4</option>
+				  <option>Ocorrência 5</option>
+			</select>
+		</div>
+		
+		<div class="col-lg-2">
+			<button type="submit" class="btn btn-default center-block">Enviar ocorrência</button>
+		</div>
+		
+		<div class="col-lg-2">
+			<a href="heatmap.html" onclick="toggleHeatmap()" class="btn btn-default center-block">Visualizar Zona</a>
+		</div>
+		<!--<button onclick="toggleHeatmap()">Toggle Heatmap</button>
+      	<button onclick="changeGradient()">Change gradient</button>
+      	<button onclick="changeRadius()">Change radius</button>
+      	<button onclick="changeOpacity()">Change opacity</button>-->
+	</div>
+	  
+	  	<div class="row hide">
+		<div class="col-lg-1">
+			<!--<img class="img-responsive center-block" src="image/minilogo.png" alt="logo DangerZone">-->
+		</div>
+		
 		<div class="col-lg-3">
-			<br>
-			<img class="img-responsive center-block" src="image/logo.png" alt="logo DangerZone">
-			<br>
-			<input type="text" class="form-control" placeholder="Latitude, Longetude" id="MyCoordinates" name="MyCoordinates">			
-			<br>
-			
+			<!--<input type="text" class="form-control" placeholder="Latitude, Longetude" id="MyCoordinates" name="MyCoordinates">			-->
+		</div>
+
+		<div class="col-lg-3">
 			<select class="form-control">
 			  <option>Ocorrência 1</option>
 			  <option>Ocorrência 2</option>
 			  <option>Ocorrência 3</option>
 			  <option>Ocorrência 4</option>
 			  <option>Ocorrência 5</option>
-			</select>
-			<br>
-			
-			<div class="row">
-				<div class="col-lg-6">
-					<button type="submit" class="btn btn-primary center-block">Enviar ocorrência</button>
-				</div>
-				
-				<div class="col-lg-6">
-					<a href="heatmap.html" onclick="toggleHeatmap()" class="btn btn-primary center-block">Visualizar Zona</a>
-				</div>
-				</div>
-			<br>
+			</select>	
 		</div>
 
-	<div class="col-lg-9">
-		<input id="pac-input" class="controls" type="text" placeholder="Search Box">
-  		<div class="center" id="map-canvas"></div>
-
+		<div class="col-lg-2">
+			<button type="submit" class="btn btn-primary center-block">Enviar ocorrência</button>			
+		</div>
+		
+		<div class="col-lg-2">
+			<a href="heatmap.html" onclick="toggleHeatmap()" class="btn btn-primary center-block">Visualizar Zona</a>
+		</div>
+		
 	</div>
-        
+	  
+	  <div class="row">
+		  	<input id="pac-input" class="controls" type="text" placeholder="Digite o endereço">
+			  <div id="map-canvas"></div>
+	  </div>
+	  
   </body>
 </html>
