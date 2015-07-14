@@ -8,19 +8,29 @@ body, html{
 	height: 100%;
 }
 
-#logo {
+#menu {
 	position: absolute;
-	top: 5px;
+	top: 24px;
+	left: 480px;
+	margin-left: 100px;
 	z-index: 5;
 	background-color: transparent;
 	padding: 5px;
 }
 
-#header {
+#send {
 	position: absolute;
-	top: 5px;
-	left: 30%;
-	margin-left: 100px;
+	top: 24px;
+	left: 805px;
+	z-index: 5;
+	background-color: transparent;
+	padding: 5px;
+}
+
+#heatmap {
+	position: absolute;
+	top: 18px;
+	left: 75px;
 	z-index: 5;
 	background-color: transparent;
 	padding: 5px;
@@ -40,7 +50,8 @@ body, html{
 }
 
 .controls {
-	margin-top: 16px;
+	margin-top: 30px;
+	margin-left: 100px;
 	border: 1px solid transparent;
 	border-radius: 2px 0 0 2px;
 	box-sizing: border-box;
@@ -55,7 +66,6 @@ body, html{
 	font-family: Roboto;
 	font-size: 15px;
 	font-weight: 300;
-	margin-left: 30px;
 	padding: 0 11px 0 13px;
 	text-overflow: ellipsis;
 	width: 400px;

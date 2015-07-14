@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="bootstrap/css/style.css" type="text/css">
     <meta charset="utf-8">
     <title>DangerZone</title>
-	<link rel="icon" href="image/icon.png">
+	<link rel="icon" href="image/danger.png">
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="bootstrap/css/style.css" type="text/css">
 
@@ -18,63 +18,44 @@
   </head>
   
   <body>
-	  
-	<div id="logo">
-		<img class="img-responsive center-block" src="image/minilogo.png" alt="logo DangerZone">
+	
+	<div id="heatmap">
+		<div class="btn-group">
+		  <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-responsive" src="image/minilogo.png" alt="logo DangerZone"></button>
+		  <ul class="dropdown-menu">
+			<li><a href="heatmap.html">Heatmap</a></li>
+			<li role="separator" class="divider"></li>
+		    <li><a href="about.html">Sobre nós</a></li>
+		  </ul>
+		</div>
 	</div>
 	
-	<div id="header">
-		
-		<div class="col-lg-4">
+	<div id="menu">
+		<div class="col-lg-12">
 			<select class="form-control">
-				  <option>Ocorrência 1</option>
-				  <option>Ocorrência 2</option>
-				  <option>Ocorrência 3</option>
-				  <option>Ocorrência 4</option>
-				  <option>Ocorrência 5</option>
+				<option>Dano</option> 1
+				<option>Desacato</option> 1
+				<option>Esbulho possessório</option> 1
+				<option>Furto</option> 3
+				<option>Roubo</option> 3
+				<option>Homicídio</option> 5
+				<option>Lesão corporal</option> 4
+				<option>Tentativa de homicídio</option> 4
+				<option>Violência doméstica</option> 3
+				<option>Atentado violento ao pudor</option> 2
+				<option>Corrupção de menor</option> 3
+				<option>Estupro</option> 4
+				<option>Embriaguez</option> 1
+				<option>Porte de arma branca</option> 2
+				<option>Porte ilegal de armas de fogo</option> 3
 			</select>
 		</div>
-		
-		<div class="col-lg-2">
-			<button type="submit" class="btn btn-default center-block">Enviar ocorrência</button>
-		</div>
-		
-		<div class="col-lg-2">
-			<a href="heatmap.html" onclick="toggleHeatmap()" class="btn btn-default center-block">Visualizar Zona</a>
-		</div>
-		<!--<button onclick="toggleHeatmap()">Toggle Heatmap</button>
-      	<button onclick="changeGradient()">Change gradient</button>
-      	<button onclick="changeRadius()">Change radius</button>
-      	<button onclick="changeOpacity()">Change opacity</button>-->
 	</div>
-	  
-	  	<div class="row hide">
-		<div class="col-lg-1">
-			<!--<img class="img-responsive center-block" src="image/minilogo.png" alt="logo DangerZone">-->
+	
+	<div id="send">
+		<div class="col-lg-6">
+			<button type="submit" class="btn btn-primary">Registrar</button>
 		</div>
-		
-		<div class="col-lg-3">
-			<!--<input type="text" class="form-control" placeholder="Latitude, Longetude" id="MyCoordinates" name="MyCoordinates">			-->
-		</div>
-
-		<div class="col-lg-3">
-			<select class="form-control">
-			  <option>Ocorrência 1</option>
-			  <option>Ocorrência 2</option>
-			  <option>Ocorrência 3</option>
-			  <option>Ocorrência 4</option>
-			  <option>Ocorrência 5</option>
-			</select>	
-		</div>
-
-		<div class="col-lg-2">
-			<button type="submit" class="btn btn-primary center-block">Enviar ocorrência</button>			
-		</div>
-		
-		<div class="col-lg-2">
-			<a href="heatmap.html" onclick="toggleHeatmap()" class="btn btn-primary center-block">Visualizar Zona</a>
-		</div>
-		
 	</div>
 	  
 	  <div class="row">
