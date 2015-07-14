@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap/css/style.css" type="text/css">
+    <meta charset="utf-8">
+    <title>DangerZone</title>
+	<link rel="icon" href="image/icon.png">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="bootstrap/css/heatmap.css" type="text/css">
+
+	<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places,visualization&sensor=false"></script>
+	<script type="text/javascript" src="bootstrap/js/heatmap.js"></script>
+	
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+  	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=visualization"></script>
+  </head>
+  
+  <body>
+	<div id="button">
+		<div class="btn-group">
+		  <button class="btn btn-default btn-xs dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="img-responsive" src="image/minilogo.png" alt="logo DangerZone"><span class="caret"></button>
+		  <ul class="dropdown-menu">
+			<li><a href="index.html">Nova Ocorrência</a></li>
+			<li role="separator" class="divider"></li>
+		    <li><a onclick="toggleHeatmap()">Mapa de calor</a></li>
+		    <li><a onclick="changeGradient()">Mudar Cor</a></li>
+		    <li><a onclick="changeRadius()">Aumentar raio</a></li>
+		    <li><a onclick="changeOpacity()">Mudar opacidade</a></li>
+		  </ul>
+		</div>
+	</div>
+	  
+	<!--<input id="pac-input" class="controls" type="text" placeholder="Search Box">			-->
+    <div id="map-canvas"></div>		
+	
+  </body>
+</html>
