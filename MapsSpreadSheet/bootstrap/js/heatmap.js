@@ -1,37 +1,46 @@
 var map, pointarray, heatmap, lat, long;
 
 // var taxiData = [
-//   new google.maps.LatLng(37.782551, -122.445368),
-//   new google.maps.LatLng(37.782745, -122.444586),
-//   new google.maps.LatLng(37.782842, -122.443688),
+//   new google.maps.LatLng(-8.152789299999999, -34.94927110000003),
+//   new google.maps.LatLng(-8.152589299999999, -34.95927110000003),
+//   new google.maps.LatLng(-8.152389299999999, -34.96927110000003),
+//   new google.maps.LatLng(-8.152489299999999, -34.97927110000003),
+//   new google.maps.LatLng(-8.052789299999999, -34.94927110000003),
+//   new google.maps.LatLng(-8.052589299999999, -34.95927110000003),
+//   new google.maps.LatLng(-8.052389299999999, -34.96927110000003),
+//   new google.maps.LatLng(-8.052489299999999, -34.97927110000003),
 // ];
 
-var taxiData = [];
+var taxiData = new Array();
 
-function readSpreadSheet() {  
-  blockspring.runParsed("query-google-spreadsheet", 
-    { "query": "SELECT A, B", "url": "https://docs.google.com/spreadsheets/d/1ZozQgFh8mXoA4QYg4hrhuEREy9cowNu_LNlzDuAZOG4/edit#gid=0"}, 
+google.maps.event.addDomListener(window, 'load', initialize2);
+
+function initialize2() {
+  
+    blockspring.runParsed("query-google-spreadsheet", 
+    { "query": "SELECT B, C", "url": "https://docs.google.com/spreadsheets/d/1ZozQgFh8mXoA4QYg4hrhuEREy9cowNu_LNlzDuAZOG4/edit#gid=1016957434"}, 
     { "api_key": "" }, function(res){
       
+      debugger;
     var data = res.params["data"];
       
     console.log(Object.keys(data)); 
     
     Object.keys(data).forEach(function (key) {
       
-      console.log(data[key].Latitude);
-      console.log(data[key].Longetude);
+      console.log(parseFloat(data[key].Latitude));
+      console.log(parseFloat(data[key].Longetude));
       console.log(key);
       
       taxiData[key] = new google.maps.LatLng(data[key].Latitude, data[key].Longetude);
+      
     });
+    console.log("Teste1");
     console.log(taxiData);
-  })
-}
-
-function initialize() {
+  });
   
-  readSpreadSheet();
+  console.log("novo LOL")
+  console.log(taxiData);
   
   var mapOptions = {
     zoom: 13,
@@ -42,6 +51,9 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
 
+  console.log("Teste3");
+  console.log(taxiData);
+  
   var pointArray = new google.maps.MVCArray(taxiData);
 
   heatmap = new google.maps.visualization.HeatmapLayer({
@@ -50,6 +62,25 @@ function initialize() {
 
   heatmap.setMap(map);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function toggleHeatmap() {
   heatmap.setMap(heatmap.getMap() ? null : map);
@@ -83,5 +114,29 @@ function changeOpacity() {
   heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
 }
 
-// google.maps.event.addDomListener(window, 'load', readSpreadSheet);
-google.maps.event.addDomListener(window, 'load', initialize);
+
+// function readSpreadSheet() {  
+//   var values = [];
+  
+//   blockspring.runParsed("query-google-spreadsheet", 
+//     { "query": "SELECT B, C", "url": "https://docs.google.com/spreadsheets/d/1ZozQgFh8mXoA4QYg4hrhuEREy9cowNu_LNlzDuAZOG4/edit#gid=1016957434"}, 
+//     { "api_key": "" }, function(res){
+      
+//       debugger;
+//     var data = res.params["data"];
+      
+//     console.log(Object.keys(data)); 
+    
+//     Object.keys(data).forEach(function (key) {
+      
+//       console.log(parseFloat(data[key].Latitude));
+//       console.log(parseFloat(data[key].Longetude));
+//       console.log(key);
+      
+//       taxiData[key] = new google.maps.LatLng(data[key].Latitude, data[key].Longetude);
+      
+//     });
+//     console.log("Teste1");
+//     console.log(taxiData);
+//   });
+// }
