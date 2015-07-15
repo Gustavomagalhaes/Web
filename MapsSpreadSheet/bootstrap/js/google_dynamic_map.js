@@ -50,8 +50,8 @@ function initialize() {
         url: "image/icon.png",
         size: new google.maps.Size(200, 200),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(60, 120),
-        scaledSize: new google.maps.Size(120, 120)
+        anchor: new google.maps.Point(50, 100),
+        scaledSize: new google.maps.Size(100, 100)
       };
 
       // Create a marker for each place.
@@ -90,6 +90,10 @@ function initialize() {
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
+}
+
+function registrarOcorrencia() {
+  
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
