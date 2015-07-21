@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Jogo da Coxinha</title>
+		<title>Te amo pra sempre!</title>
 		
 		<style>
 			canvas {
@@ -15,96 +15,45 @@
 			}
 			
 			html, body {
-/*				background: #000000;*/
+				/*background: #000000;*/
+				/*background: #FFFFFF;*/
 /*            	background: #d1d2d1 url(image/backgroundDark.jpg) repeat fixed left top !important;*/
-          		background: #d1d2d1 url(image/backgroundLight.jpeg) repeat fixed left top !important;
+          		/*background: #d1d2d1 url(image/amor.jpeg) repeat fixed left top !important;*/
+				background: #d1d2d1 url(image/amorwhite.jpg) fixed left bottom !important;
 			}
 		</style>
 		
 		<script type="text/javascript" src="bootstrap/js/jquery-2.1.4.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" type="text/css">
-		<link rel="icon" href="image/coxinha300.png">
+		<link rel="icon" href="image/miniheart.png">
 	</head>	
 	
 	<body>
-<!--Triggers-->
-
-<!--		<input size="40" value="Write a character into this field!" onkeypress="GetChar (event);"/>-->
 		
-<!--		<div style="visibility:hidden;">
-			<img id="coxinha" src="image/coxinha300.png" alt="Coxinha">
-		</div>-->
-		
-		<script> // Javascript
-			//Variáveis do jogo
+		<script>
 			var canvas, ctx, c, gameHeight, gameWidth, frames = 0;
-			var Xstill = 350, Ystill = 400;
-			var Xdefault = Xstill, Ydefault = Ystill;
-			var jumpHeight = 200;
-			var speed = 15;
-			var message;
 			var mouseX, mouseY;
-			var jumping = false;
-			var coinSwitcher = 0;
-			var coinX = 400;
-			var audio = new Audio('coin.mp3');
-			var pageTurner = 0, cloudTurner = 0;
  		
 			function main() {
 				gameHeight = window.innerHeight;
 				gameWidth = window.innerWidth;
 				
-				if (gameWidth >= 800) {
-					gameHeight = 762;
-					gameWidth = 1024;
-				}
-				
 				canvas = document.createElement("canvas");
 				canvas.width = gameWidth;
 				canvas.height = gameHeight;
-//				canvas.style.border = "1px solid #000";
 				
 				ctx = canvas.getContext("2d");
 				document.body.appendChild(canvas);
-//				document.addEventListener("mousedown", keyboard);
+				
 
 				document.addEventListener('mousemove', function(evt) {
 					var mousePosition = getMousePosition(canvas, evt);
 					setMousePosition(mousePosition.x, mousePosition.y); 
 					message = 'Mouse position: \nX: ' + mouseX + ', Y: ' + mouseY;
-					console.log(message);
+					// console.log(message);
 					}, false);
 
-				document.onkeydown = function(e) {
-				    switch (e.keyCode) {
-				        case 37:
-				            //alert('left');
-//							X=X-speed;
-//							if (!jumping) jump();
-							if (checkPosition()) smallJump();
-							animate("X",jumpHeight/2,200);
-				            break;
-				        case 38:
-				            //alert('up');
-//							Y=Y-speed;
-							if (checkPosition()) jump();
-//							if (!jumping) jump();
-							break;
-				        case 39:
-				            //alert('right');
-//							X=X+speed;
-//							if (!jumping) jump();
-							if (checkPosition()) smallJump();
-				            animate("X",-jumpHeight/2,200);
-							break;
-				        case 40:
-				            //alert('down');
-//							Y=Y+speed;
-//							animate("Y",-jumpHeight,300);
-				            break;
-				    }
-				};
 				run();
 			}
 			
@@ -112,17 +61,7 @@
 				mouseX = x;
 				mouseY = y;
 			}
-			
-//			function keyboard(event) {
-//				alert("Mozão, te amo!");
-//			}
-			
-			function writeMessage(message) {
-			    ctx.font = '18pt Calibri';
-			    ctx.fillStyle = 'black';
-				ctx.fillText(message, 10, 25);
-			    }
-				
+		
 			function getMousePosition(canvas, evt) {
 				var rect = canvas.getBoundingClientRect();
 				return {
@@ -130,168 +69,30 @@
 				  y: evt.clientY - rect.top
 				};
 			}
-			
-//			function GetChar(event){
-//	            var chCode = ('charCode' in event) ? event.charCode : event.keyCode;
-//	            alert ("The Unicode character code is: " + chCode);
-//        	}
-			
+
 			function run() {
 				update();
-				tip();
-//				ctx.clearRect(0, 0, gameWidth, gameHeight);
-				draw();
+				drawHeart();
 				window.requestAnimationFrame(run);
 			}
 			
 			function update() {
 				frames++;
-				pageTurner++;
-				cloudTurner++;
-				coinSwitcher++;
-				if (coinSwitcher > 9) coinSwitcher = 0;
-				if (pageTurner > gameWidth) pageTurner = 0;
-				if (cloudTurner > gameWidth*4) cloudTurner = 0;
 			}
 			
-			function animate(index, range, duration) {
-				var start = new Date().getTime();
-				var distance = range;
-				var end = start + duration;
-				var currentY = Ystill;
-				var currentX = Xstill;
+			function drawHeart() {
+				var heart = new Image();
+				heart.src = 'image/miniheart.png';
+			    // ctx.drawImage(heart, mouseX-25, mouseY-25);
 				
-				function step() {
-					var timestamp = new Date().getTime();
-					var progress = Math.min((duration - (end - timestamp)) / duration, 1);
-					
-					if (index == 'X') {
-						Xstill = currentX - (distance * progress);	
-					} 
-					
-					if (index == 'Y') {
-						Ystill = currentY - (distance * progress);
-					}
-					
-					if (index == 'JUMP') {
-						Ystill = currentY - (distance * progress);
-					} 
-					
-					if (progress < 1) {
-						requestAnimationFrame(step);
-					} 
-					
-					if (progress == 1 && index == 'JUMP') {
-						land();
-					}
-				}
-				return step();
-			}
-			
-			function jump() {
-				jumping = true;
-				animate("JUMP",jumpHeight,200);
-			}
-			
-			function smallJump() {
-				jumping = true;
-				animate("JUMP",jumpHeight/2,100);
-			}
-			
-			function checkPosition() {
-				if (Ystill = Ydefault) {
-					return true;
-				} else {
-					return false;
-				}
-			}
+				ctx.drawImage(heart, getRandomInt(0, gameWidth), 100);
 
-			function tip() {
-				var Xtip = Xstill+150, Ytip = Ystill;
-				if (Ytip <= 200) {
-					if (Xtip >= coinX && Xtip <= coinX+100) {
-						sound();
-						coinX = getRandomInt(50, gameWidth-150);	
-					}
-				} 
-			}
-			
-			function sound() {
-				audio.play();	
-			}
-			
-			
-			function land() {
-				var back = Ystill-Ydefault;
-				animate("Y",back,200);
-//				animate("Y",-jumpHeight,200);
-				jumping = false;
-			}
-			
-			function drawCoxinha() {
-				// Coxinha
-//			    var img = document.getElementById("coxinha");
-				var coxinha = new Image();
-				coxinha.src = 'image/coxinha300.png';
-//			    ctx.drawImage(coxinha, mouseX-150, mouseY-150);
-//				ctx.beginPath();
-				ctx.drawImage(coxinha, Xstill, Ystill);
-			}
-			
-			function ellipse(cx, cy, rx, ry) {
-		        ctx.save(); // save state
-		        ctx.beginPath();
-		        ctx.translate(cx-rx, cy-ry);
-		        ctx.scale(rx, ry);
-		        ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
-		        ctx.restore(); // restore to original state
-//		        ctx.stroke();
-			}
-			
-			function drawShadow() {
-				var Xbottom = Xstill+147, Ybottom = 680;
-				ctx.fillStyle = "black";
-				ctx.fill();
-				var rx = 100, ry = 20;
-				var scaleShadow = Ystill/370;
-				ellipse(Xbottom, Ybottom, rx*scaleShadow, ry*scaleShadow);	
-			}
-			
-			function drawScene() {
-//				ctx.fillStyle = "#99CCFF";
-//				ctx.fillStyle = "transparent";
-//				ctx.fillRect(0, 0, gameWidth, gameHeight);
-				var scene = new Image();
-				scene.src = 'image/scene.png';
-			    ctx.drawImage(scene, 0-pageTurner, 0);
-				ctx.drawImage(scene, gameWidth-pageTurner, 0);	
-			}
-			
-			function drawClouds() {
-				var clouds = new Image();
-				clouds.src = 'image/clouds.svg';
-			    ctx.drawImage(clouds, 0-cloudTurner/4, 0);
-				ctx.drawImage(clouds, gameWidth-cloudTurner/4, 0);	
 			}
 			
 			function getRandomInt(min, max) {
     			return Math.floor(Math.random() * (max - min + 1)) + min;
 			}
 			
-			function drawCoin() {
-				var coin = new Image();
-				coin.src = 'image/coins.jpg';
-				ctx.drawImage(coin, coinSwitcher*100, 0, 100, 100, coinX, 200, 100, 100);
-			}
-			
-			function draw() {
-				drawScene();
-				drawClouds();
-				drawShadow();
-				drawCoin();
-				drawCoxinha();
-				sound();
-			}
 			main();
 		</script>
 	</body>
