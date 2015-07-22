@@ -28,14 +28,23 @@
 			}]
 		}],
 		popsicles:[{
-			name: "creamsicle",
+			name: "Red heart",
 			slices: [{
 				name: "falling",
-				src: "images/heart.png"
+				src: "images/heartRed.png"
 			}, {
 				name: "crashed",
-				src: "images/heart.png"
+				src: "images/heartRed.png"
 			}]
+		}, {
+			name: "Purple heart",
+			slices: [{
+				name: "falling",
+				src: "images/heartPurple.png"
+			}, {
+				name: "crashed",
+				src: "images/heartPurple.png"
+			}]	
 		}]
 	};
     
@@ -182,7 +191,7 @@
 							};
 						
 						popsicle.setSlice("crashed");
-						game.addTicker(melt, 1000);
+						game.addTicker(melt, 100);
 
 						for (i = 0; i < structures.length; i += 1) {
 							if (popsicle.isRectInside(structures[i])) {
@@ -205,7 +214,7 @@
 					}
 				});
 				
-				game.addTicker(dropPopsicle, 100);
+				game.addTicker(dropPopsicle, 50);
 			};
 
 		bg = BLOCKS.slice(spec.bg);
