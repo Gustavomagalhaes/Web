@@ -1,0 +1,24 @@
+html, body, #map-canvas {
+    height: 100%;
+	width: 100%;
+    margin: 0px;
+    padding: 0px
+}
+	  
+#button {
+	position: absolute;
+	top: 5px;
+	/*left: 50%;*/
+	/*margin-left: 100px;*/
+	z-index: 5;
+	background-color: transparent;
+	padding: 5px;
+}
+
+#logo {
+	position: absolute;
+	top: 5px;
+	z-index: 5;
+	background-color: transparent;
+	padding: 5px;
+}
