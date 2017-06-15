@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body, html { 
+            height: 100%;
+            min-height: 100%;
+            overflow: hidden; 
+            padding: 0; 
+            margin: 0; 
+        }
+
+        .page {
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            min-height: 100%; 
+            position: absolute; 
+            display: none; 
+            overflow: hidden;
+            border: 0;
+            font-size: 50px;
+        }
+
+        .currentPage { 
+            display: block; 
+        }
+    </style>
+</head>
+<body>
+    <script>
+        
+        function load_page1() {
+             document.getElementById("content").innerHTML='<object type="text/html" data="home.html" ></object>';
+        }
+        
+        var TIME_PER_PAGE = 10000;
+        window.onload = function() {
+            var pages = document.querySelectorAll('.page'),
+                numPages = pages ? pages.length : 0;
+                i = -1;
+
+            function nextPage() {
+                if (i >= 0)
+                    pages[i].classList.remove('currentPage');
+
+//                i++;
+                i = (i + 1) % numPages;
+                pages[i].classList.add('currentPage');
+//                if (i < numPages - 1)
+//                  setTimeout(nextPage, TIME_PER_PAGE);
+                setTimeout(nextPage, TIME_PER_PAGE);
+            }
+
+            nextPage();
+        }
+    </script>
+
+    <div class="page">
+        <iframe src="http://150.161.0.17/dashboard/" frameborder="no" border="0" scrolling="no" height="5000" width="100%"></iframe>
+    </div>
+    <div class="page">
+        https://trello.com/b/QVSz6ANn
+        <iframe src="https://trello.com/b/QVSz6ANn.html" frameborder="no" border="0" scrolling="no" height="5000" width="100%"></iframe>
+    </div>
+    <div class="page">
+        https://trello.com/b/Z6qccIOa
+        <iframe src="https://trello.com/b/Z6qccIOa.html" frameborder="no" border="0" scrolling="no" height="5000" width="100%"></iframe>
+    </div>
+    <div class="page">
+        https://trello.com/b/Yshba6vL
+        <iframe src="https://trello.com/b/Yshba6vL.html" frameborder="no" border="0" scrolling="no" height="5000" width="100%"></iframe>
+    </div>
+</body>
+</html>
